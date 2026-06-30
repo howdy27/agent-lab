@@ -25,8 +25,8 @@ fi
 # =====================
 # 방화벽 상태 점검
 # =====================
-UFW_STATUS=$(sudo ufw status | grep -i "Status: active")
-if [ -z "$UFW_STATUS" ]; then
+UFW_STATUS=$(systemctl is-active ufw 2>/dev/null)
+if [ "$UFW_STATUS" != "active" ]; then
     echo "[$TIMESTAMP] [WARNING] UFW is not active" >> $LOG_FILE
 fi
 
